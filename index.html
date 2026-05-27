@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prime Estates — Imóveis de Alto Padrão</title>
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/global.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/home.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+</head>
+<body>
+
+  <nav class="nav" id="nav">
+    <div class="nav__logo">
+      <span class="nav__logo-mark">P</span>
+      <span class="nav__logo-text">PRIME <em>ESTATES</em></span>
+    </div>
+    <ul class="nav__links">
+      <li><a href="#inicio" class="nav__link active">Início</a></li>
+      <li><a href="#imoveis" class="nav__link">Imóveis</a></li>
+      <li><a href="#diferenciais" class="nav__link">Diferenciais</a></li>
+      <li><a href="#agendar" class="nav__link">Agendar</a></li>
+    </ul>
+    <a href="#agendar" class="btn btn--outline">Agendar Visita</a>
+    <button class="nav__hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <section class="hero" id="inicio">
+    <div class="hero__bg">
+      <div class="hero__grain"></div>
+      <div class="hero__overlay"></div>
+    </div>
+    <div class="hero__content">
+      <p class="hero__eyebrow">Curadoria de Imóveis Premium</p>
+      <h1 class="hero__title">
+        Encontre o lar<br />
+        <em>que merece</em><br />
+        sua história.
+      </h1>
+      <p class="hero__sub">Selecionamos os melhores imóveis de alto padrão em São Paulo e região.</p>
+      <div class="hero__actions">
+        <a href="#imoveis" class="btn btn--gold">Ver Imóveis</a>
+        <a href="#agendar" class="btn btn--ghost">Falar com Especialista</a>
+      </div>
+    </div>
+    <div class="hero__scroll-hint">
+      <span>Rolar</span>
+      <div class="hero__scroll-line"></div>
+    </div>
+    <div class="hero__stats">
+      <div class="hero__stat">
+        <span class="hero__stat-num" data-target="380">0</span>
+        <span class="hero__stat-label">Imóveis Exclusivos</span>
+      </div>
+      <div class="hero__stat">
+        <span class="hero__stat-num" data-target="1200">0</span>
+        <span class="hero__stat-label">Famílias Atendidas</span>
+      </div>
+      <div class="hero__stat">
+        <span class="hero__stat-num" data-target="18">0</span>
+        <span class="hero__stat-label">Anos de Mercado</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="search-bar">
+    <div class="search-bar__inner">
+      <div class="search-bar__group">
+        <label>Tipo</label>
+        <select id="search-tipo">
+          <option value="">Todos</option>
+          <option value="Apartamento">Apartamento</option>
+          <option value="Casa">Casa</option>
+          <option value="Cobertura">Cobertura</option>
+        </select>
+      </div>
+      <div class="search-bar__group">
+        <label>Bairro</label>
+        <input type="text" placeholder="Ex: Jardins, Itaim..." id="search-bairro" />
+      </div>
+      <div class="search-bar__group">
+        <label>Valor Máximo</label>
+        <select id="search-valor">
+          <option value="">Sem limite</option>
+          <option value="5000000">Até R$ 5 milhões</option>
+          <option value="10000000">Até R$ 10 milhões</option>
+          <option value="20000000">Até R$ 20 milhões</option>
+        </select>
+      </div>
+      <button class="btn btn--gold" id="search-btn">Buscar</button>
+    </div>
+  </section>
+
+  <section class="featured section" id="imoveis">
+    <div class="container">
+      <div class="section__header">
+        <p class="section__eyebrow">Seleção Exclusiva</p>
+        <h2 class="section__title">Imóveis em Destaque</h2>
+      </div>
+      <div class="swiper featured-swiper">
+        <div class="swiper-wrapper" id="featured-cards">
+          </div>
+        <div class="swiper-pagination"></div>
+      </div>
+      <div class="featured__nav">
+        <button class="swiper-btn prev" id="feat-prev">←</button>
+        <button class="swiper-btn next" id="feat-next">→</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="map-section section">
+    <div class="container">
+      <div class="section__header">
+        <p class="section__eyebrow">Localização</p>
+        <h2 class="section__title">Imóveis no Mapa</h2>
+      </div>
+      <div id="map" class="map-box" style="height: 450px; z-index: 1;"></div>
+    </div>
+  </section>
+
+  <section class="why section" id="diferenciais">
+    <div class="container why__grid">
+      <div class="why__text">
+        <p class="section__eyebrow">Por que nos escolher</p>
+        <h2 class="section__title">Experiência que<br/><em>faz a diferença</em></h2>
+        <p class="why__desc">Nossa equipe de especialistas cuida de cada detalhe da sua jornada — da busca ao fechamento — com discrição, expertise e dedicação total.</p>
+      </div>
+      <div class="why__cards">
+        <div class="why__card">
+          <span class="why__icon">◈</span>
+          <h3>Curadoria Premium</h3>
+          <p>Apenas imóveis selecionados rigorosamente entram no nosso portfólio.</p>
+        </div>
+        <div class="why__card">
+          <span class="why__icon">◈</span>
+          <h3>Tour Virtual 3D</h3>
+          <p>Visite cada imóvel sem sair de casa com tecnologia imersiva.</p>
+        </div>
+        <div class="why__card">
+          <span class="why__icon">◈</span>
+          <h3>Assessoria Jurídica</h3>
+          <p>Parceiros jurídicos especializados para uma negociação segura.</p>
+        </div>
+        <div class="why__card">
+          <span class="why__icon">◈</span>
+          <h3>Gestão de Patrimônio</h3>
+          <p>Consultoria completa para valorizar e proteger seus investimentos.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="schedule section" id="agendar">
+    <div class="container schedule__inner">
+      <div class="schedule__text">
+        <p class="section__eyebrow">Agenda</p>
+        <h2 class="section__title">Agende uma <em>Visita</em></h2>
+        <p>Escolha o melhor horário e nosso consultor irá até você ou o receberá no imóvel de sua escolha.</p>
+      </div>
+      <div class="schedule__form">
+        <div class="form-group">
+          <label>Seu Nome</label>
+          <input type="text" id="sch-name" placeholder="Nome completo" />
+        </div>
+        <div class="form-group">
+          <label>WhatsApp</label>
+          <input type="tel" id="sch-phone" placeholder="(11) 99999-9999" />
+        </div>
+        <div class="form-group">
+          <label>Data Preferida</label>
+          <input type="text" id="sch-date" placeholder="Selecione uma data" readonly />
+        </div>
+        <div class="form-group">
+          <label>Horário</label>
+          <select id="sch-time">
+            <option>09:00</option>
+            <option>10:00</option>
+            <option>11:00</option>
+            <option>14:00</option>
+            <option>15:00</option>
+            <option>16:00</option>
+            <option>17:00</option>
+          </select>
+        </div>
+        <button class="btn btn--gold" id="sch-submit">Confirmar Agendamento</button>
+        <div id="sch-feedback" class="schedule__feedback hidden" style="margin-top: 1rem; padding: 1rem; border-radius: 4px; font-size: 0.9rem;"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="testimonials section">
+    <div class="container">
+      <div class="section__header">
+        <p class="section__eyebrow">Clientes</p>
+        <h2 class="section__title">O que dizem sobre nós</h2>
+      </div>
+      <div class="swiper testimonials-swiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <div class="testimonial-card">
+              <p>"A Prime Estates encontrou exatamente o que procurávamos. Processo impecável, do início ao fim."</p>
+              <div class="testimonial-author">
+                <div class="testimonial-avatar">CR</div>
+                <div>
+                  <strong>Carlos & Regina Monteiro</strong>
+                  <span>Adquiriram cobertura no Itaim</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="testimonial-card">
+              <p>"Profissionalismo e discrição raros no mercado. Recomendo sem hesitar para quem busca algo especial."</p>
+              <div class="testimonial-author">
+                <div class="testimonial-avatar">AF</div>
+                <div>
+                  <strong>Amanda Ferreira</strong>
+                  <span>Investidora — Jardins</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="testimonial-card">
+              <p>"Meu apartamento dos sonhos nos Jardins. A equipe foi extraordinária durante toda a negociação."</p>
+              <div class="testimonial-author">
+                <div class="testimonial-avatar">RP</div>
+                <div>
+                  <strong>Ricardo Palhares</strong>
+                  <span>Comprou apartamento nos Jardins</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-pagination testimonials-pagination"></div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <div class="nav__logo">
+          <span class="nav__logo-mark">P</span>
+          <span class="nav__logo-text">PRIME <em>ESTATES</em></span>
+        </div>
+        <p>Curadoria de imóveis premium em São Paulo e região.</p>
+        <div class="footer__social">
+          <a href="#" aria-label="Instagram">IG</a>
+          <a href="#" aria-label="LinkedIn">LI</a>
+          <a href="https://wa.me/551132549900" target="_blank" aria-label="WhatsApp">WA</a>
+        </div>
+      </div>
+      
+      <div class="footer__links">
+        <h4>Navegação</h4>
+        <ul>
+          <li><a href="#inicio">Início</a></li>
+          <li><a href="#imoveis">Imóveis</a></li>
+          <li><a href="#diferenciais">Diferenciais</a></li>
+          <li><a href="#agendar">Agendar Visita</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__links">
+        <h4>Tipos</h4>
+        <ul>
+          <li><a href="#imoveis" onclick="document.getElementById('search-tipo').value = 'Apartamento'; document.getElementById('search-btn').click();">Apartamentos</a></li>
+          <li><a href="#imoveis" onclick="document.getElementById('search-tipo').value = 'Casa'; document.getElementById('search-btn').click();">Casas</a></li>
+          <li><a href="#imoveis" onclick="document.getElementById('search-tipo').value = 'Cobertura'; document.getElementById('search-btn').click();">Coberturas</a></li>
+          <li><a href="#imoveis" onclick="document.getElementById('search-tipo').value = ''; document.getElementById('search-btn').click();">Ver Todos</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__contact">
+        <h4>Contato</h4>
+        <p>Av. Brigadeiro Faria Lima, 3477<br/>Itaim Bibi — São Paulo, SP</p>
+        <p><a href="tel:+551132549900">(11) 3254-9900</a></p>
+        <p><a href="mailto:contato@primeestates.com.br">contato@primeestates.com.br</a></p>
+      </div>
+    </div>
+    
+    <div class="footer__bottom">
+      <p>© 2026 Prime Estates. Todos os direitos reservados. CRECI 000000-J</p>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script src="https://npmcdn.com/flatpickr/dist/l10n/pt.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/map.js"></script>
+  <script src="js/schedule.js"></script>
+  <script src="js/home.js"></script>
+  <script src="js/nav.js"></script>
+</body>
+</html>
