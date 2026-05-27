@@ -1,0 +1,191 @@
+/* ==================== GLOBAL ==================== */
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+}
+
+.container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--space-md);
+}
+
+.section {
+  padding: var(--space-xl) 0;
+}
+
+.section__header {
+  text-align: center;
+  margin-bottom: var(--space-lg);
+}
+
+.section__eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: 0.75rem;
+}
+
+.section__title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 300;
+  color: var(--color-cream);
+  line-height: 1.2;
+}
+
+.section__title em {
+  font-style: italic;
+  color: var(--color-gold-light);
+}
+
+/* ==================== BUTTONS ==================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 2rem;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border-radius: var(--radius-sm);
+  transition: var(--transition);
+  white-space: nowrap;
+}
+
+.btn--gold {
+  background: var(--color-gold);
+  color: var(--color-bg);
+}
+.btn--gold:hover {
+  background: var(--color-gold-light);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-gold);
+}
+
+.btn--outline {
+  border: 1px solid var(--color-gold);
+  color: var(--color-gold);
+}
+.btn--outline:hover {
+  background: var(--color-gold);
+  color: var(--color-bg);
+}
+
+.btn--ghost {
+  border: 1px solid rgba(255,255,255,0.2);
+  color: var(--color-cream);
+}
+.btn--ghost:hover {
+  border-color: var(--color-cream);
+  background: rgba(255,255,255,0.05);
+}
+
+/* ==================== FORM ELEMENTS ==================== */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.form-group label {
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 0.85rem 1rem;
+  color: var(--color-text);
+  font-size: 0.95rem;
+  transition: var(--transition);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--color-gold);
+  background: rgba(196, 164, 100, 0.05);
+}
+
+.form-group select option { background: var(--color-surface); }
+
+/* ==================== TAGS ==================== */
+.tag {
+  display: inline-block;
+  padding: 0.3rem 0.8rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  background: rgba(196, 164, 100, 0.12);
+  color: var(--color-gold);
+  border: 1px solid rgba(196, 164, 100, 0.2);
+}
+
+/* ==================== DIVIDER ==================== */
+.divider {
+  width: 40px;
+  height: 1px;
+  background: var(--color-gold);
+  margin: 1rem auto;
+}
+
+/* ==================== HIDDEN ==================== */
+.hidden { display: none !important; }
+
+/* ==================== SCROLLBAR ==================== */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--color-bg); }
+::-webkit-scrollbar-thumb { background: var(--color-gold-dark); border-radius: 3px; }
+
+/* ==================== SELECTION ==================== */
+::selection { background: var(--color-gold); color: var(--color-bg); }
+
+/* ==================== PAGE TRANSITIONS ==================== */
+.page-enter {
+  animation: fadeIn 0.5s ease both;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ==================== SWIPER CUSTOM ==================== */
+.swiper-pagination-bullet {
+  background: var(--color-gold-dark);
+  opacity: 0.4;
+}
+.swiper-pagination-bullet-active {
+  background: var(--color-gold);
+  opacity: 1;
+}
+.swiper-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  color: var(--color-gold);
+  font-size: 1.1rem;
+  transition: var(--transition);
+  background: rgba(255,255,255,0.02);
+}
+.swiper-btn:hover {
+  background: var(--color-gold);
+  color: var(--color-bg);
+  border-color: var(--color-gold);
+}
